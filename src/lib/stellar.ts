@@ -1,5 +1,3 @@
-import * as StellarSdk from "@stellar/stellar-sdk";
-
 const network = import.meta.env.VITE_NETWORK ?? "testnet";
 const networkPassphrase =
   import.meta.env.VITE_STELLAR_NETWORK_PASSPHRASE ??
@@ -7,26 +5,10 @@ const networkPassphrase =
     ? "Public Global Stellar Network ; September 2015"
     : "Test SDF Network ; September 2015");
 
-const rpcUrl = import.meta.env.VITE_RPC_URL ?? "https://soroban-testnet.stellar.org";
-const horizonUrl =
-  import.meta.env.VITE_HORIZON_URL ??
-  (network === "pubnet" ? "https://horizon.stellar.org" : "https://horizon-testnet.stellar.org");
-
 export const stellarConfig = {
   network,
   networkPassphrase,
-  rpcUrl,
-  horizonUrl,
 };
-
-export const rpc = new StellarSdk.rpc.Server(rpcUrl);
-export const horizon = new StellarSdk.Horizon.Server(horizonUrl);
-
-export const contractId =
-  import.meta.env.VITE_PROOFMINT_CONTRACT_ID ?? "";
-
-export const apiUrl =
-  import.meta.env.VITE_API_URL ?? "http://localhost:3001";
 
 export function toDateTime(unixSeconds: number | bigint): string {
   const n = typeof unixSeconds === "bigint" ? Number(unixSeconds) : unixSeconds;
