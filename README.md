@@ -1,69 +1,53 @@
-# StellarCrop Web
+# ProofMint Web
 
-Web frontend for StellarCrop.
+Issuer dashboard and public verifier for verifiable credentials on Stellar.
 
-This repo contains:
-- Marketing/landing experience (`/`)
-- Product application shell (`/app`)
-- Pages for receipts, transfers, markets, and settings
-
-## Product Context
-
-StellarCrop enables tokenized warehouse receipts for smallholder farmers on Stellar. The web app is the user-facing layer for:
-- Farmer receipt visibility
-- Transfer and redemption flows
-- Market and pricing views
-- Issuer/cooperative operational interfaces
-
-## Tech Stack
-
-- React + TypeScript
-- Vite
-- CSS (custom design system)
-
-## Local Development
+## Setup
 
 ```bash
 npm install
-cp .env.example .env
+```
+
+Create a `.env` file from `.env.example`:
+
+```env
+VITE_NETWORK=testnet
+VITE_RPC_URL=https://soroban-testnet.stellar.org
+VITE_STELLAR_NETWORK_PASSPHRASE=Test SDF Network ; September 2015
+VITE_PROOFMINT_CONTRACT_ID=C...
+VITE_API_URL=http://localhost:3001
+```
+
+Start development:
+
+```bash
 npm run dev
 ```
 
-Default local URL: `http://localhost:5173`
+## Pages
 
-## Environment
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page |
+| `/app` | Issuer dashboard (wallet required) |
+| `/verify/:id` | Public credential verifier |
+| `/credentials/:id` | Credential detail page |
 
-See `.env.example` for required values. Typical variables include:
-- `VITE_NETWORK`
-- `VITE_API_BASE_URL`
-- `VITE_RPC_URL`
-- `VITE_RECEIPT_CONTRACT_ID`
+## Features
 
-## Current Status
+- Freighter wallet connection
+- Issue credentials on-chain (simulate, sign, submit, confirm)
+- Metadata upload to API with hash verification
+- Public credential verification with status display
+- Quick credential ID lookup
+- Network mismatch detection
 
-Implemented:
-- Responsive landing page
-- App route separation (`/` and `/app`)
-- App dashboard navigation
-- Core page scaffolds for feature areas
+## Prerequisites
 
-Planned:
-- Wallet connect and session handling
-- Live data wiring from API/indexer
-- Transaction simulation + signing UX
-- End-to-end issue/redeem/transfer flows
+- A running `proofmint-api` instance
+- A running `proofmint-indexer` with indexed contract events
+- A deployed `proofmint-contracts` instance on testnet
 
-## Contribution Areas
+## License
 
-- Frontend data-fetch hooks and caching strategy
-- Wallet integration and auth states
-- Form validation and transaction status UX
-- Accessibility hardening and test coverage
-- Visual regression testing and component docs
-
-## Related Repositories
-
-- `stellarcrop-contracts` (Soroban contracts)
-- `stellarcrop-api` (application backend)
-- `stellarcrop-indexer` (chain event ingestion)
-- `stellarcrop-shared` (shared types/config)
+Apache-2.0
